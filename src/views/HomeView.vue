@@ -1,18 +1,22 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <li v-for="item in $store.state.cards" :key="item.id">
+     <GameCard :title="item.name"/>
+    </li>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import GameCard from "../components/Card.vue"
 
 export default {
+  beforeCreate() {
+    this.$store.dispatch('getGames');
+  },
   name: 'HomeView',
   components: {
-    HelloWorld
+    GameCard,
   }
 }
 </script>
